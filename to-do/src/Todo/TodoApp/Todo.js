@@ -21,10 +21,9 @@ export default function Todo(props) {
   };
   const handelFormSubmit = (ev) => {
     ev.preventDefault();
-    // return userForm.todo;
     if (!userForm.todo)
         return
-    props.data(userForm.todo);
+    props.addData(userForm.todo);
     setUserForm({
       ...setUserForm,
       todo:""
