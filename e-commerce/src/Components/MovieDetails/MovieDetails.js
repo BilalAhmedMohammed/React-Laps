@@ -17,14 +17,14 @@ export default function MovieDetails() {
   }, []);
   return (
     <div className="card mb-3">
-      <img src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}className="card-img-top" alt="..." />
+      <img src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}className="card-img-top img-fluid" style={{height:500}} alt="..." />
       <div className="card-body">
-        <h5 className="card-title">{movieDetails.title}</h5>
-        <p className="card-text">
+        <h5 className="card-title text-center text-success">{movieDetails.title}</h5>
+        <p className="card-text text-secondary">
         {movieDetails.overview}
         </p>
         <p className="card-text">
-          <small className="text-muted">{movieDetails.vote_average}</small>
+          <small className="text-muted text-center fw-bold">{movieDetails.vote_average}</small>
         </p>
       </div>
     </div>
