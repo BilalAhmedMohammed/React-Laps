@@ -3,13 +3,12 @@ import Movie from "../Movie/Movie";
 import "./list.css";
 import ReactPaginate from "react-paginate";
 import { axiosInstance } from "../Network/axiosConfig";
-import Pagination from "../Pagination/Pagination";
 
 export default function ListMovie() {
   const [page, setPage] = useState([]);
   const [pageCount, setPageCount] = useState(100);
   const [movies, setMovies] = useState([]);
-  const [searchTitle, setsearchTitle] = useState("");
+  const [pageQuery, setPageQuery] = useState([]);
 
   const handelPageClick = (data) => {
     let currentPage = data.selected + 1;
@@ -17,7 +16,7 @@ export default function ListMovie() {
   };
   useEffect(() => {
     axiosInstance
-      .get("/popular", {
+      .get("/movie/popular", {
         params: {
           page: page,
         },
@@ -28,6 +27,19 @@ export default function ListMovie() {
       })
       .catch((err) => console.log(err));
   }, [page]);
+  useEffect(() => {
+    axiosInstance
+      .get("/search/movie", {
+        params: {
+          query:pageQuery ,
+        },
+      })
+      .then((res) => {
+        // setPageCount(res.data.total_pages);
+        setMovies(res.data.results);
+      })
+      .catch((err) => console.log(err));
+  }, [pageQuery]);
   return (
     <>
       <div id="movies" className="container-fluid">
@@ -35,20 +47,10 @@ export default function ListMovie() {
           className="input-group-text w-75 mb-3 ms-5"
           type={"search"}
           placeholder={"Search By Movie Name"}
-          onChange={(ev)=>setsearchTitle(ev.target.value)}
+          onChange={(ev)=>setPageQuery(ev.target.value)}
         />
         <div className="row">
-          {movies
-            .filter((value) => {
-              if (searchTitle === "") return value;
-              else if (
-                value.title
-                  .toLowerCase()
-                  .includes(searchTitle.toLocaleLowerCase())
-              )
-                return value;
-            })
-            .map((movie) => {
+            {movies.map((movie) => {
               return (
                 <div key={movie.id} className="col-4">
                   <Movie movie={movie} />
@@ -78,7 +80,6 @@ export default function ListMovie() {
           activeClassName={"active"}
         />
       </div>
-      {/* <Pagination /> */}
     </>
   );
 }

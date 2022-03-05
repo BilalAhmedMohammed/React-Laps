@@ -8,7 +8,7 @@ export default function MovieDetails() {
   console.log("test1");
   useEffect(() => {
     axiosInstance
-      .get(`/${params.id}`)
+      .get(`/movie/${params.id}`)
       .then((res) => {
           console.log(res.data);
         setMovies(res.data);
