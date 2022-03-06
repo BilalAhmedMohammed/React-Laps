@@ -5,6 +5,7 @@ import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import listMovie from "./Components/Pages/listMovie";
 import MovieDetails from "./Components/MovieDetails/MovieDetails";
+import Favourit from "./Components/Favourit/Favourit";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path={'/Register'} exact component={Register}></Route>
         <Route path={'/'} exact component={listMovie}></Route>
         <Route path={'/Movies'} exact component={listMovie}></Route>
+        <Route path={'/Favourit'} exact component={Favourit}></Route>
         <Route path={"/movie-details/:id"} exact component={MovieDetails} />
       </Switch>
     </BrowserRouter>

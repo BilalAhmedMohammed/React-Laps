@@ -1,7 +1,9 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom'
 
 export default function NavBar() {
+  const cnt = useSelector((state) => state.Favourit.count);
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div className="container-fluid">
@@ -16,6 +18,9 @@ export default function NavBar() {
           </li>
           <li className="nav-item">
             <NavLink to="/Register" style={isActive => ({color: isActive ? "white" : "gray",background:isActive?"green":""})} className="navbar-brand fs-4" >Register</NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink to="/Favourit" style={isActive => ({color: isActive ? "white" : "gray",background:isActive?"green":""})} className="navbar-brand fs-4" >Favourit<i className="ps-3 text-warning fa-solid fa-star"></i><span className='text-white ps-3'>{cnt}</span></NavLink>
           </li>
           {/* <li className="nav-item">
             <NavLink className="nav-NavLink fs-4" ></NavLink>
