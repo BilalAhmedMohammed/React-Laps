@@ -6,9 +6,14 @@ import Register from "./Components/Register/Register";
 import listMovie from "./Components/Pages/listMovie";
 import MovieDetails from "./Components/MovieDetails/MovieDetails";
 import Favourit from "./Components/Favourit/Favourit";
+import { LanguageContext } from "./Components/context/language";
+import { useState } from "react";
 
 function App() {
+  const [lang, setLang] = useState("en");
+
   return (
+    <LanguageContext.Provider value={{ lang, setLang }} >
     <BrowserRouter>
       <NavBar />
       <Switch>
@@ -20,6 +25,8 @@ function App() {
         <Route path={"/movie-details/:id"} exact component={MovieDetails} />
       </Switch>
     </BrowserRouter>
+    </LanguageContext.Provider>
+
   );
 }
 
